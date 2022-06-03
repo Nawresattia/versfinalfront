@@ -1,0 +1,91 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"> </h1>
+    <a class="d-none d-sm-inline-block btn btn-sm  btn-primary shadow-sm" >Ajouter un Directeur
+      General</a>
+  </div>
+
+  <!-- Content Row 
+        
+         <th scope="col">DirecteurSiteID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">site</th>
+                    <th scope="col">LastConnexion</th>
+                    <th scope="col">Action</th>
+                  -->
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text">Les directeurs général</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <div class="mat-elevation-z8">
+          <mat-form-field appearance="standard">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Filter by any Key" #input>
+          </mat-form-field>
+          <table mat-table [dataSource]="dataSource">
+                <!-- Position Column -->
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>Id</th>
+                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+    
+                <!-- Name Column -->
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef> email </th>
+                  <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="nom">
+                  <th mat-header-cell *matHeaderCellDef>nom</th>
+                  <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="prenom">
+                  <th mat-header-cell *matHeaderCellDef>prenom</th>
+                  <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+                </ng-container>
+   
+  
+                <ng-container matColumnDef="tel">
+                  <th mat-header-cell *matHeaderCellDef>tel</th>
+                  <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
+                </ng-container>
+  
+  
+                <ng-container matColumnDef="site">
+                  <th mat-header-cell *matHeaderCellDef>site</th>
+                  <td mat-cell *matCellDef="let element"> {{element.site}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="logoutdate">
+                  <th mat-header-cell *matHeaderCellDef>logoutdate</th>
+                  <td mat-cell *matCellDef="let element"> {{element.logoutdate}} </td>
+                
+                
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef>Actions </th>
+                  <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="primary" (click)="edit(element.id)">Edit</button>
+                    <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="delet(element.id)">Delete</button> </td>
+                </ng-container>
+                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                 
+                 
+              </table>
+    
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtonsaria-label="Select page of periodic elements">
+              </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
