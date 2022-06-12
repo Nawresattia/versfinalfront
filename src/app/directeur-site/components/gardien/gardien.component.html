@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800"></h1>
-      <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" >Ajouter un gardien</a>   
+      <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" (click)="create()" >Ajouter un gardien</a>   
 
     </div>
       <div class="card shadow mb-4">
@@ -61,8 +61,8 @@
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions </th>
                 <td mat-cell *matCellDef="let element">
-                  <button mat-raised-button color="primary" (click)="edit(element.id)">Edit</button>
-                  <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="delet(element.id)">Delete</button> </td>
+                  <button mat-raised-button color="primary" (click)="edit(element.id)">Modifier</button>
+                  <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="delet(element.id)">Supprimer</button> </td>
               </ng-container>
               
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

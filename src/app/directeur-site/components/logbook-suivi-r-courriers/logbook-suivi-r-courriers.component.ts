@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { LoadserviceService } from 'src/Services/loadservice.service';
 
@@ -6,7 +7,7 @@ import { LoadserviceService } from 'src/Services/loadservice.service';
 export interface PeriodicElement {
   id:number;
   Date: string;
-  reference: number;
+  reference: String;
   Entrepot: string;
   Nom_chauffeur: string;
    
@@ -23,24 +24,23 @@ export class LogbookSuiviRCourriersComponent implements OnInit,AfterViewInit {
   date = [this.All, this.dymdm.getHours(), this.dymdm.getMinutes()].join('-');
 
 
-  displayedColumns: string[] = ['Date', 'reference', 'Entrepot', 'Nom_chauffeur',"actions"];
+  displayedColumns: string[] = ['id','Date', 'reference', 'Entrepot', 'Nom_chauffeur'];
   
   dataSource ;
 
-
-   
   
     
-  constructor(public load:LoadserviceService) { }
+  constructor(public load:LoadserviceService, public dialog: MatDialog) { }
  
   ngOnInit(): void {
+    
+    this.getAll();
   }
   ngAfterViewInit(): void {
   }
 
-
   
-  getAll(){
+getAll(){
     this.load.get("AllReceptionCourriers").then(
       (data:any) => {        
         //this.ELEMENT_DATA=data;
@@ -52,20 +52,6 @@ export class LogbookSuiviRCourriersComponent implements OnInit,AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  delet(id){
-    console.log(id)
+  }}
 
-  }
-  edit(id){
-    console.log(id)
-
-  }
   
-
-
-
-}
-
-
-

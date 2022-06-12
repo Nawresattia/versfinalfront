@@ -37,13 +37,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadserviceService } from 'src/Services/loadservice.service';
+import { MessangerComponent } from './messanger/messanger.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MessangerComponent
   ],
+  exports: [MessangerComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
@@ -84,9 +87,10 @@ import { LoadserviceService } from 'src/Services/loadservice.service';
     MatTableModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [HttpClientModule,LoadserviceService],
+  providers: [HttpClientModule, LoadserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

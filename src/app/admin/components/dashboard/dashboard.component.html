@@ -6,7 +6,7 @@
     </div>
 
     <!-- Content Row -->
-    <div class="row">
+        <div class="row">
 
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -88,30 +88,31 @@
     <div class="row">
 
         <!-- Area Chart -->
-        <div class="col-xl-12 col-lg-7">
+        <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Reception</h6>
                 </div>
                 <div class="card-body">
-                    <div class="chart-area" style=" width: 400px;height:350px">
-                        <canvas id="recechart" #recechart>{{cha}}</canvas>
+                    <div class="chart-area" >
+                     
+                        <canvas id="ReceptionChart"  width="400" height="400" #ReceptionChart></canvas>
                     </div>
                 </div>
             </div>
         </div>
        
 
-        <div class="col-xl-12 col-lg-7">
+        <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
+                <!-- Card Header - Dropdown parcroulancedata -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Parc Roulance</h6>
                 </div>
                 <div class="card-body">
-                    <div class="chart-area" style=" width: 400px;height:350px">
-                        <canvas id="parcchart" #parcchart></canvas>
+                    <div class="chart-area">
+                        <canvas id="RoulanceChart"  width="400" height="400" #RoulanceChart></canvas>
                     </div>
                 </div>
             </div>

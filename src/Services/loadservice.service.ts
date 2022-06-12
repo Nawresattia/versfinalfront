@@ -50,11 +50,13 @@ export class LoadserviceService {
   // Extra Functions 
 
   save_data(name, x) {
-  //  this.storage.set(name, x)
+    localStorage.setItem(name, x)
   }
-
+  getData(name) {
+    return localStorage.getItem(name);
+  }
   delete_data(x) {
-   // this.storage.remove(x)
+    localStorage.remove(x)
   }
   openSnackBar(message: string) {
     this.snackBar.open(message, '', {

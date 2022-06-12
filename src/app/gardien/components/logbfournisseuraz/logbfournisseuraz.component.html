@@ -2,7 +2,7 @@
     <div class="testbox">
       <form action="/">
         <div class="banner">
-          <h6><strong>Fiche de suivi des fournisseur aziza </strong> </h6>
+          <h6><strong>Fiche de suivi la reception des fournisseur aziza </strong> </h6>
          
         </div>
         <div class="item">
@@ -11,8 +11,8 @@
         </div>
         <div class="colums">
           <div class="item">
-            <label for="dt"> Date<span>*</span></label>
-           <input id="dt" type="date" name="dt" required/>
+            <label for="date"> Date<span>*</span></label>
+           <input id="date" type="date" name="date" />
           </div>
          
           <div class="item">
@@ -37,8 +37,8 @@
  
       
           <div class="btn-block">
-            <button type="submit" href="/">Enregistrer</button>
-          </div>
+            <button  type="button" class="btn btn-primary" cdkFocusInitial (click) = 'create()' >enregistrer</button>    
+           </div>
         </div>
         
         

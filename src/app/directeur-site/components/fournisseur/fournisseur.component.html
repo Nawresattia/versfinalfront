@@ -1,8 +1,10 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-       
-    </div>
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"></h1>
+    <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" (click)="create()" >Ajouter un fournisseur</a>   
+
+  </div>
   
     <!-- Content Row 
           
@@ -17,7 +19,7 @@
   
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text">listes des Fournisseurs</h6>
+        <h6 class="m-0 font-weight-bold text">Logbook du suivi la reception des fournisseurs</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -29,40 +31,41 @@
             <table mat-table [dataSource]="dataSource">
   
               <!-- Position Column -->
-              <ng-container matColumnDef="Id">
-                <th mat-header-cell *matHeaderCellDef>Id </th>
-                <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> id</th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+              
+              <!-- Position Column -->
+              <ng-container matColumnDef="nom">
+                <th mat-header-cell *matHeaderCellDef> nom </th>
+                <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
               </ng-container>
   
               <!-- Name Column -->
-              <ng-container matColumnDef="Nom">
-                <th mat-header-cell *matHeaderCellDef> Nom</th>
-                <td mat-cell *matCellDef="let element"> {{element.Nom}} </td>
+              <ng-container matColumnDef="code">
+                <th mat-header-cell *matHeaderCellDef> code </th>
+                <td mat-cell *matCellDef="let element"> {{element.code}} </td>
               </ng-container>
-  
-              <!-- Weight Column -->
-              <ng-container matColumnDef="Code">
-                <th mat-header-cell *matHeaderCellDef> Code </th>
-                <td mat-cell *matCellDef="let element"> {{element.Code}} </td>
-              </ng-container>
-  
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="type">
-                <th mat-header-cell *matHeaderCellDef> type </th>
-                <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-              </ng-container>
+     <!-- Name Column -->
+     <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> type </th>
+        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+      </ng-container>
 
-             <!-- Symbol Column -->
-              <ng-container matColumnDef="Datecreation">
-                <th mat-header-cell *matHeaderCellDef> Datecreation </th>
-                <td mat-cell *matCellDef="let element"> {{element.Datecreation}} </td>
+              <!-- Weight Column -->
+              <ng-container matColumnDef="datecreation">
+                <th mat-header-cell *matHeaderCellDef> datecreation </th>
+                <td mat-cell *matCellDef="let element"> {{element.datecreation}} </td>
               </ng-container>
+  
+              
   
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions </th>
                 <td mat-cell *matCellDef="let element">
                   <button mat-raised-button color="primary" (click)="edit(element)">Edit</button>
-                  <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="delet(element)">Delete</button> </td>
+                  <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="delet(element)">Delete</button> </td>
               </ng-container>
               
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -70,7 +73,7 @@
                
                
             </table>
-  
+            
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtonsaria-label="Select page of periodic elements">
             </mat-paginator>
           </div>

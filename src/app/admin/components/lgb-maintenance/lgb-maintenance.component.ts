@@ -4,12 +4,12 @@ import { LoadserviceService } from 'src/Services/loadservice.service';
 
 export interface PeriodicElement {
   id:number;
-  Date:string;
-  Heure:string;
-  Demandeur: string;
-  Site: string;
-  code_equipement: number;
-  reference_Ot: string;
+  date:string;
+ 
+  demandeur: string;
+  site: string;
+  equipement: number;
+  referenceOt: string;
   Nature_demande:string;
 }
 
@@ -24,7 +24,7 @@ export class LgbMaintenanceComponent implements OnInit,AfterViewInit {
   All = [this.dymdm.getFullYear(), this.dymdm.getMonth() + 1, this.dymdm.getDate()].join('/');
   date = [this.All, this.dymdm.getHours(), this.dymdm.getMinutes()].join('-');
 
-  displayedColumns: string[] = ['id','Date', 'Heure', 'Demandeur', 'Site','code_equipement','reference_Ot','Nature_demande',"actions"];
+  displayedColumns: string[] = ['id','date', 'demandeur', 'referenceOt','equipement','site','nature_demande'];
     
   dataSource ;
 
@@ -33,6 +33,7 @@ export class LgbMaintenanceComponent implements OnInit,AfterViewInit {
   constructor(public load:LoadserviceService) { }
  
   ngOnInit(): void {
+    this.getAll();
   }
   ngAfterViewInit(): void {
   }

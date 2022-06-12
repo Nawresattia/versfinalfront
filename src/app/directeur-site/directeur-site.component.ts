@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LoadserviceService } from 'src/Services/loadservice.service';
+import { MessangerComponent } from '../messanger/messanger.component';
 
 @Component({
   selector: 'app-directeur-site',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DirecteurSiteComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  openMessg(){
+    this.dialog.open(MessangerComponent, {
+      height: '95',
+      width: '95',
+    });
+  }
 }
+
+

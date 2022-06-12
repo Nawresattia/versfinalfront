@@ -6,3 +6,9 @@ table {
 .text {
   color: #4e73df!important;
 } 
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  background-color: #123dbc;
+}
+.mat-flat-button.mat-warn, .mat-raised-button.mat-warn, .mat-fab.mat-warn, .mat-mini-fab.mat-warn {
+  background-color: #e80f0f;
+}

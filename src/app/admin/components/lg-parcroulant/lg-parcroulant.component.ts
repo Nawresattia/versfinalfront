@@ -29,37 +29,42 @@ export class LgParcroulantComponent implements OnInit,AfterViewInit  {
   All = [this.dymdm.getFullYear(), this.dymdm.getMonth() + 1, this.dymdm.getDate()].join('/');
   date = [this.All, this.dymdm.getHours(), this.dymdm.getMinutes()].join('-');
 
-  displayedColumns: string[]  = ['id','Code','Date', 'Immatricule', 'Nom_chauffeur', 'Heure_sortie','N_plombage_sortie','Kilometrage_sortie','Heure_entre','N_plombage_entre','kilometrage_entre',"actions"];
-  dataSource ;
-  constructor(public load:LoadserviceService) { }
- 
+  displayedColumns: string[]  = ['id','Code','Date', 'Immatricule', 'Nom_chauffeur', 'Heure_sortie','N_plombage_sortie','Kilometrage_sortie','Heure_entre','N_plombage_entre','kilometrage_entre'];
+  
+  dataSource;
+
+
+  constructor(public load: LoadserviceService ) { }
+
   ngOnInit(): void {
+
+    this.getAll();
+
   }
   ngAfterViewInit(): void {
   }
 
-  
-  getAll(){
+
+  getAll() {
     this.load.get("AllParcRoulant").then(
-      (data:any) => {        
+      (data: any) => {
         //this.ELEMENT_DATA=data;
         console.log(data);
         this.dataSource = new MatTableDataSource<PeriodicElement>(data);
       }
-  );}
-    
+    );
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  delet(id){
-    console.log(id)
-
-  }
-  edit(id){
-    console.log(id)
-
-  }
-
+  
 
 }
+ 
+    
+ 
+
+
+

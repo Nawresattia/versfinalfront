@@ -89,5 +89,6 @@ import { FormsModule } from '@angular/forms';
     MatSortModule,
     MatTableModule
   ]
+  
 })
 export class AdminModule { }

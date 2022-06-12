@@ -1,8 +1,9 @@
-<!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-       
-    </div>
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"></h1>
+    <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" (click)="create()" >Ajouter un chauffeur</a>   
+
+  </div>
   
     <!-- Content Row 
           
@@ -31,7 +32,7 @@
               <!-- Position Column -->
               <ng-container matColumnDef="Id">
                 <th mat-header-cell *matHeaderCellDef>Id </th>
-                <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
               </ng-container>
   
               <!-- Name Column -->
@@ -46,6 +47,12 @@
                 <td mat-cell *matCellDef="let element"> {{element.prenomchauffeur}} </td>
               </ng-container>
   
+              <ng-container matColumnDef="site">
+                <th mat-header-cell *matHeaderCellDef> site </th>
+                <td mat-cell *matCellDef="let element"> {{element.site}} </td>
+              </ng-container>
+
+
               <!-- Symbol Column -->
               <ng-container matColumnDef="cin">
                 <th mat-header-cell *matHeaderCellDef> cin </th>
@@ -68,8 +75,8 @@
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions </th>
                 <td mat-cell *matCellDef="let element">
-                  <button mat-raised-button color="primary" (click)="edit(element)">Edit</button>
-                  <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="delet(element)">Delete</button> </td>
+                  <button mat-raised-button color="primary" (click)="edit(element)">Modifier</button>
+                  <button mat-raised-button color="warn" style="margin-left: 10px;" (click)="delet(element)">Supprimer</button> </td>
               </ng-container>
               
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

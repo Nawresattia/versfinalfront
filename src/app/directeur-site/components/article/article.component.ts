@@ -15,8 +15,8 @@ export interface PeriodicElement {
 
 @Component({
   selector: 'app-articles',
-  templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.scss']
+  templateUrl: './article.component.html',
+  styleUrls: ['./article.component.scss']
 })
 export class ArticlesComponent implements OnInit,AfterViewInit {
 
@@ -27,11 +27,11 @@ export class ArticlesComponent implements OnInit,AfterViewInit {
   displayedColumns: string[] = ['Id', 'code','Intitule', 'Fournisseur','Datecreation', 'actions'];
  //{id: 1, code: '44774', intitule: 'Hi first in', fournisseurs: Array(0), datecreation: '2022-05-11T00:04:39.000+00:00'}
   dataSource;
-  dialog: any;
+ 
 
 
    
-  constructor(public load:LoadserviceService) { }
+  constructor(public load:LoadserviceService, public dialog: MatDialog) { }
  
   ngOnInit(): void {
     this.getAll();
@@ -48,6 +48,12 @@ export class ArticlesComponent implements OnInit,AfterViewInit {
       }
   );
   }
+  create(){
+    this.dialog.open(CreateArticleDialog, {
+      height: '95',
+      width: '95',
+    });
+  }
     
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -55,8 +61,8 @@ export class ArticlesComponent implements OnInit,AfterViewInit {
   }
   delet(id) {
     console.log(id)
-    if (confirm("Sure You want to delete this article!") == true) {
-      this.load.post({ "articleid": id }, "DeleteArticle").then(
+    if (confirm("Sure You want to delete this user!") == true) {
+      this.load.post({ "userid": id }, "DeleteUser").then(
         (data: any) => {
           console.log(data);
           if (data.key == "true") {
@@ -80,18 +86,21 @@ export class ArticlesComponent implements OnInit,AfterViewInit {
   }
 
 }
-
+ 
+ 
+ 
 @Component({
   selector: 'dialog-update-article',
   templateUrl: 'edit-pop.html',
 })
+ 
 export class EditArticleDialog {
-  Id: any="";
+  id:any="";
   code: any="";
   Intitule: any="";
   Fournisseur: any="";
   Datecreation: any="";
-  actions: any="";
+  
   constructor(public dialogRef: MatDialogRef<EditArticleDialog>,
     @Inject(MAT_DIALOG_DATA) public data, public load: LoadserviceService) { }
   close() {
@@ -101,14 +110,14 @@ export class EditArticleDialog {
     console.log(this.data)
     let senddata =
     {
-      "Id": this.Id,
+      "articleid": this.data,
       "code": this.code,
       "Intitule": this.Intitule,
       "Fournisseur": this.Fournisseur,
       "Datecreation": this.Datecreation,
-       
+      
     };
-    if(this.data==null && this.Id=="" && this.code=="" && this.Intitule=="" && this.Fournisseur=="" && this.Datecreation=="" )
+    if(this.data==null && this.code=="" && this.Intitule=="" && this.Fournisseur==""   && this.Datecreation=="" )
     {this.load.openSnackBar("Please Update at least one input");}
    else {
     this.load.post(senddata, "UpdateArticle").then(
@@ -121,3 +130,48 @@ export class EditArticleDialog {
    }
   }
 }
+@Component({
+  selector: 'dialog-create-article',
+  templateUrl: 'create-pop.html',
+})
+export class CreateArticleDialog {
+  code: any="";
+  Intitule: any="";
+  Fournisseur:any="";
+  Datecreation: any="";
+  
+
+  constructor(public dialogRef: MatDialogRef<CreateArticleDialog>,
+    
+  public load: LoadserviceService) { }
+  close() {
+    this.dialogRef.close();
+  }
+  create(){
+    let senddata =
+    {
+       "code": this.code,
+      "Intitule": this.Intitule,
+      "Fournisseur": this.Fournisseur,
+       "Datecreation":this.Datecreation,
+      
+    };
+    if(this.code=="" || this.Intitule=="" || this.Fournisseur==""|| this.Datecreation=="")
+    {this.load.openSnackBar("Please Fill in all inputs");}
+   else {
+    this.load.post(senddata, "CreateArticle").then(
+      (data: any) => {
+        console.log(data);
+        if (data.key == "true") { this.load.openSnackBar("Create Done"); }
+        else this.load.openSnackBar("Error");
+
+      });
+   }
+  }
+}
+
+
+
+
+
+

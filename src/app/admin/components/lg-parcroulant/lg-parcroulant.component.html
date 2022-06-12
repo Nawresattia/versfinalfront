@@ -1,116 +1,113 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-       
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+     
+  </div>
+
+  <!-- Content Row 
+        
+         <th scope="col">DirecteurSiteID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">site</th>
+                    <th scope="col">LastConnexion</th>
+                    <th scope="col">Action</th>
+                  -->
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text">Logbook du suivi des parc roulant</h6>
     </div>
-  
-    <!-- Content Row 
-          
-           <th scope="col">DirecteurSiteID</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Phone</th>
-                      <th scope="col">site</th>
-                      <th scope="col">LastConnexion</th>
-                      <th scope="col">Action</th>
-                    -->
-  
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text">Logbook du suivi des parc roulant</h6>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <div class="mat-elevation-z8">
-            <mat-form-field appearance="standard">
-              <mat-label>Filter</mat-label>
-              <input matInput (keyup)="applyFilter($event)" placeholder="Filter by any Key" #input>
-            </mat-form-field>
-            <table mat-table [dataSource]="dataSource">
-  
- <!-- Position Column -->
- <ng-container matColumnDef="id">
-  <th mat-header-cell *matHeaderCellDef>Id </th>
-  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    <div class="card-body">
+      <div class="table-responsive">
+        <div class="mat-elevation-z8">
+          <mat-form-field appearance="standard">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Filter by any Key" #input>
+          </mat-form-field>
+          <table mat-table [dataSource]="dataSource">
+
+
+
+        
+<!-- Position Column -->
+<ng-container matColumnDef="id">
+<th mat-header-cell *matHeaderCellDef>Id </th>
+<td mat-cell *matCellDef="let element"> {{element.id}} </td>
 </ng-container>
- <!-- Position Column -->
- <ng-container matColumnDef="Code">
-  <th mat-header-cell *matHeaderCellDef>Code </th>
-  <td mat-cell *matCellDef="let element"> {{element.Code}} </td>
+<!-- Position Column -->
+<ng-container matColumnDef="Code">
+<th mat-header-cell *matHeaderCellDef>Code </th>
+<td mat-cell *matCellDef="let element"> {{element.code}} </td>
 </ng-container>
 
-              
-              <!-- Position Column -->
-              <ng-container matColumnDef="Date">
-                <th mat-header-cell *matHeaderCellDef>Date </th>
-                <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
-              </ng-container>
-  
-              <!-- Name Column -->
-              <ng-container matColumnDef="Immatricule">
-                <th mat-header-cell *matHeaderCellDef> Immatricule </th>
-                <td mat-cell *matCellDef="let element"> {{element.Immatricule}} </td>
-              </ng-container>
-  
-              <!-- Weight Column -->
-              <ng-container matColumnDef="Nom_chauffeur">
-                <th mat-header-cell *matHeaderCellDef> Nom chauffeur </th>
-                <td mat-cell *matCellDef="let element"> {{element.Nom_chauffeur}} </td>
-              </ng-container>
-  
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="Heure_sortie">
-                <th mat-header-cell *matHeaderCellDef> Heure de sortie </th>
-                <td mat-cell *matCellDef="let element"> {{element.Heure_sortie}} </td>
-              </ng-container>
-  
-   <!-- Symbol Column -->
-   <ng-container matColumnDef="N_plombage_sortie">
-    <th mat-header-cell *matHeaderCellDef> N°plombage de sortie </th>
-    <td mat-cell *matCellDef="let element"> {{element.N_plombage_sortie}} </td>
-  </ng-container>
+            
+            <!-- Position Column -->
+            <ng-container matColumnDef="Date">
+              <th mat-header-cell *matHeaderCellDef>Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
 
-   <!-- Symbol Column -->
-   <ng-container matColumnDef="Kilometrage_sortie">
-    <th mat-header-cell *matHeaderCellDef> Kilometrage de sortie </th>
-    <td mat-cell *matCellDef="let element"> {{element.Kilometrage_sortie}} </td>
-  </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="Immatricule">
+              <th mat-header-cell *matHeaderCellDef> Immatricule </th>
+              <td mat-cell *matCellDef="let element"> {{element.immatricule}} </td>
+            </ng-container>
 
-   <!-- Symbol Column -->
-   <ng-container matColumnDef="Heure_entre">
-    <th mat-header-cell *matHeaderCellDef> Heure d'entre </th>
-    <td mat-cell *matCellDef="let element"> {{element.Heure_entre}} </td>
-  </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Nom_chauffeur">
+              <th mat-header-cell *matHeaderCellDef> Nom chauffeur </th>
+              <td mat-cell *matCellDef="let element"> {{element.chaufeur}} </td>
+            </ng-container>
 
-   <!-- Symbol Column -->
-   <ng-container matColumnDef="N_plombage_entre">
-    <th mat-header-cell *matHeaderCellDef> N°plombage d'entre </th>
-    <td mat-cell *matCellDef="let element"> {{element.N_plombage_entre}} </td>
-  </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Heure_sortie">
+              <th mat-header-cell *matHeaderCellDef> Heure de sortie </th>
+              <td mat-cell *matCellDef="let element"> {{element.heureS}} </td>
+            </ng-container>
 
-   <!-- Symbol Column -->
-   <ng-container matColumnDef="kilometrage_entre">
-    <th mat-header-cell *matHeaderCellDef> kilometrage en entre </th>
-    <td mat-cell *matCellDef="let element"> {{element.kilometrage_entre}} </td>
-  </ng-container>
+ <!-- Symbol Column -->
+ <ng-container matColumnDef="N_plombage_sortie">
+  <th mat-header-cell *matHeaderCellDef> N°plombage de sortie </th>
+  <td mat-cell *matCellDef="let element"> {{element.nplombageS}} </td>
+</ng-container>
+
+ <!-- Symbol Column -->
+ <ng-container matColumnDef="Kilometrage_sortie">
+  <th mat-header-cell *matHeaderCellDef> Kilometrage de sortie </th>
+  <td mat-cell *matCellDef="let element"> {{element.kilometrageS}} </td>
+</ng-container>
+
+ <!-- Symbol Column -->
+ <ng-container matColumnDef="Heure_entre">
+  <th mat-header-cell *matHeaderCellDef> Heure d'entre </th>
+  <td mat-cell *matCellDef="let element"> {{element.heureE}} </td>
+</ng-container>
+
+ <!-- Symbol Column -->
+ <ng-container matColumnDef="N_plombage_entre">
+  <th mat-header-cell *matHeaderCellDef> N°plombage d'entre </th>
+  <td mat-cell *matCellDef="let element"> {{element.nplombageE}} </td>
+</ng-container>
+
+ <!-- Symbol Column -->
+ <ng-container matColumnDef="kilometrage_entre">
+  <th mat-header-cell *matHeaderCellDef> kilometrage en entre </th>
+  <td mat-cell *matCellDef="let element"> {{element.kilometrageE}} </td>
+</ng-container>
+
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onEdit(row.Date)"></tr>
  
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>Actions </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-raised-button color="primary" (click)="edit(element)">Edit</button>
-      <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="delet(element)">Delete</button> </td>
-  </ng-container>
-  
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onEdit(row.Date)"></tr>
-   
-   
+ 
 </table>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtonsaria-label="Select page of periodic elements">
 </mat-paginator>
-          </div>
         </div>
       </div>
     </div>
   </div>
+</div>

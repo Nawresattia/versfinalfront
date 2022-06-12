@@ -1,5 +1,5 @@
-import { Time } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
  import { MatTableDataSource } from '@angular/material/table';
 import { LoadserviceService } from 'src/Services/loadservice.service';
 
@@ -24,7 +24,7 @@ export class LogbookgrComponent implements OnInit, AfterViewInit {
   All = [this.dymdm.getFullYear(), this.dymdm.getMonth() + 1, this.dymdm.getDate()].join('/');
   date = [this.All, this.dymdm.getHours(), this.dymdm.getMinutes()].join('-');
 
-  displayedColumns: string[] = ['id','Entrepot', 'date', 'Heure_arrive', 'Heure_entre', 'Heure_depart',"actions"];
+  displayedColumns: string[] = ['id','Entrepot', 'date', 'Heure_arrive', 'Heure_entre', 'Heure_depart'];
   
   dataSource;
 
@@ -34,6 +34,7 @@ export class LogbookgrComponent implements OnInit, AfterViewInit {
   constructor(public load:LoadserviceService) { }
  
   ngOnInit(): void {
+    this.getAll();
   }
   ngAfterViewInit(): void {
   }
@@ -51,16 +52,8 @@ export class LogbookgrComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  delet(id){
-    console.log(id)
+  } }
 
-  }
-  edit(id){
-    console.log(id)
-
-  }
-}
-
-
+  
+ 
 

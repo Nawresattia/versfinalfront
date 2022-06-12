@@ -8,7 +8,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -34,26 +33,60 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { DirecteurSiteRoutingModule } from './directeur-site-routing.module';
 import { DirecteurSiteComponent } from './directeur-site.component';
-import { LogbookgrComponent } from './components/logbookgr/logbookgr.component';
-import { EditUserDialog, GardienComponent } from './components/gardien/gardien.component';
-import { CamionComponent, EditCamionDialog } from './components/camion/camion.component';
-  import { LogbooksuiviParcRComponent } from './components/logbooksuivi-parc-r/logbooksuivi-parc-r.component';
+
+import { CreateUserDialog, EditUserDialog, GardienComponent } from './components/gardien/gardien.component';
+import { CamionComponent, CreateCamionDialog, EditCamionDialog } from './components/camion/camion.component';
+import { LogbooksuiviParcRComponent } from './components/logbooksuivi-parc-r/logbooksuivi-parc-r.component';
 import { LogbookSuiviRCourriersComponent } from './components/logbook-suivi-r-courriers/logbook-suivi-r-courriers.component';
- import { LogbookSMaintenanceComponent } from './components/logbook-s-maintenance/logbook-s-maintenance.component';
-import { FournisseursComponent } from './components/fournisseurs/fournisseurs.component';
-
-import { ChauffeurComponent } from './components/chauffeur/chauffeur.component';
+import { LogbookSMaintenanceComponent } from './components/logbook-s-maintenance/logbook-s-maintenance.component';
+ 
+ 
+import { ArticlesComponent, CreateArticleDialog, EditArticleDialog } from './components/article/article.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { ArticlesComponent, EditArticleDialog } from './components/article/article.component';
+import { ChauffeurComponent, CreateChauffeurDialog, EditChauffeurDialog } from './components/chauffeur/chauffeur.component';
+import { CreateFournisseurDialog, EditFournisseurDialog, FournisseurComponent } from './components/fournisseur/fournisseur.component';
+import { LogbookgrComponent } from './components/logbookgr/logbookgr.component';
 
-  
+
 @NgModule({
-  declarations: [DirecteurSiteComponent, LogbookgrComponent, GardienComponent, EditUserDialog, EditCamionDialog ,EditArticleDialog,
-    LogbooksuiviParcRComponent, LogbookSuiviRCourriersComponent, LogbookSMaintenanceComponent, CamionComponent,FournisseursComponent, CamionComponent, ChauffeurComponent, ArticlesComponent],
+  declarations: [DirecteurSiteComponent,
+   
+    GardienComponent,
+    EditUserDialog,
+    EditCamionDialog,
+    EditArticleDialog,
+    EditChauffeurDialog,
+     EditFournisseurDialog,
+     LogbooksuiviParcRComponent,
+    LogbookSuiviRCourriersComponent,
+    LogbookSMaintenanceComponent,
+    CamionComponent,
+    
+
+    ChauffeurComponent,
+     
+    ArticlesComponent,
+    CreateUserDialog,
+    CreateCamionDialog,
+    CreateChauffeurDialog,
+    CreateFournisseurDialog,
+    CreateArticleDialog,
+    FournisseurComponent,
+    LogbookgrComponent],
   exports: [
     EditUserDialog,
+    EditCamionDialog,
+    EditChauffeurDialog,
+    EditFournisseurDialog,
+    EditArticleDialog,
+    CreateUserDialog,
+    CreateCamionDialog,
+    CreateChauffeurDialog,
+    CreateFournisseurDialog,
+    CreateArticleDialog,
   ],
-    imports: [
+  imports: [
     CommonModule,
     DirecteurSiteRoutingModule,
     MatCheckboxModule,
@@ -82,14 +115,17 @@ import { ArticlesComponent, EditArticleDialog } from './components/article/artic
     MatProgressBarModule,
     MatRippleModule,
     MatBottomSheetModule,
-    MatDialogModule,
+
     MatSnackBarModule,
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+
+
   ],
+  entryComponents: [MatDialogModule],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

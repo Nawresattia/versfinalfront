@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MessangerComponent } from '../messanger/messanger.component';
 
 @Component({
   selector: 'app-gardien',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GardienComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  openMessg(){
+    this.dialog.open(MessangerComponent, {
+      height: '95',
+      width: '95',
+    });
+  }
 }

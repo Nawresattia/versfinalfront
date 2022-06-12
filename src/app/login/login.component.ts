@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       console.log(da)
       if (da && da['nom']) {
         this.load.save_data("nom", da.nom);
-        this.load.save_data("nom", da.role);
+        this.load.save_data("id", da.id);
        if(da.role=="admin")   this.router.navigate(['admin']);
        else if(da.role=="gardien")  this.router.navigate(['Gardien']);
        else if(da.role=="directeur-site") this.router.navigate(['dirs']);

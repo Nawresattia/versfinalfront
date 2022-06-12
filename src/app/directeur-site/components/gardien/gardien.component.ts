@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+ 
 import { LoadserviceService } from 'src/Services/loadservice.service';
 
 export interface PeriodicElement {
@@ -51,21 +52,28 @@ export class GardienComponent implements OnInit, AfterViewInit {
     );
   }
 
+  create(){
+    this.dialog.open(CreateUserDialog, {
+      height: '95',
+      width: '95',
+    });
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   delet(id) {
     console.log(id)
-    if (confirm("Sure You want to delete this user!") == true) {
+    if (confirm("Etes-vous sûr!") == true) {
       this.load.post({ "userid": id }, "DeleteUser").then(
         (data: any) => {
           console.log(data);
           if (data.key == "true") {
-            this.load.openSnackBar("Delete Done");
+            this.load.openSnackBar("Suppression effectué avec succé");
             this.getAll()
           }
-          else this.load.openSnackBar("Error")
+          else this.load.openSnackBar("Erreur")
 
         });
     } else { }
@@ -82,7 +90,9 @@ export class GardienComponent implements OnInit, AfterViewInit {
   }
 
 }
-
+ 
+ 
+ 
 @Component({
   selector: 'dialog-update-user',
   templateUrl: 'edit-pop.html',
@@ -102,6 +112,7 @@ export class EditUserDialog {
   }
   update() {
     console.log(this.data)
+    console.log('test')
     let senddata =
     {
       "userid": this.data,
@@ -114,18 +125,69 @@ export class EditUserDialog {
       "password": this.password,
     };
     if(this.data==null && this.nom=="" && this.prenom=="" && this.tel=="" && this.site=="" && this.date=="" && this.password=="")
-    {this.load.openSnackBar("Please Update at least one input");}
+    {this.load.openSnackBar("mettre à jour au moin un champ");}
    else {
     this.load.post(senddata, "UpdateUser").then(
       (data: any) => {
         console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("Updated Done"); }
-        else this.load.openSnackBar("Error");
+        if (data.key == "true") { this.load.openSnackBar("Mise à jour effectué avec succé"); }
+        else this.load.openSnackBar("Erreur");
+
+      });
+   }
+   
+  }
+}
+
+
+
+
+@Component({
+  selector: 'dialog-create-user',
+  templateUrl: 'create-pop.html',
+})
+export class CreateUserDialog {
+  nom: any="";
+  email: any="";
+  prenom: any="";
+  site: any="";
+  tel: any="";
+  date: any="";
+  password: any="";
+
+  constructor(public dialogRef: MatDialogRef<CreateUserDialog>,
+    
+  public load: LoadserviceService) { }
+  close() {
+    this.dialogRef.close();
+  }
+  //
+  create() {
+    
+    let senddata =
+    {
+      "nom": this.nom,
+      "email": this.email,
+      "prenom": this.prenom,
+      "tel": this.tel,
+      "site": this.site,
+      "password": this.password,
+    };
+    console.log(senddata);
+    if(this.nom=="" || this.email=="" || this.prenom=="" || this.tel=="" || this.site=="" || this.password=="")
+    {this.load.openSnackBar("Veuillez remplir toutes les entrées");}
+   else {
+    console.log(senddata);
+    this.load.post(senddata, "CreateUser").then(
+      (data: any) => {
+        console.log(data);
+        if (data.key == "true") { this.load.openSnackBar("ajout effectué avec succé"); }
+        else this.load.openSnackBar("Erreur");
 
       });
    }
   }
+  
 }
-
 
 

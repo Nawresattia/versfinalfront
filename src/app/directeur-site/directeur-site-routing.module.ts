@@ -1,10 +1,10 @@
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ArticleComponent } from './components/article/article.component';
+import { ArticlesComponent } from './components/article/article.component';
  import { CamionComponent } from './components/camion/camion.component';
 import { ChauffeurComponent } from './components/chauffeur/chauffeur.component';
-import { FournisseursComponent } from './components/fournisseurs/fournisseurs.component';
-import { GardienComponent } from './components/gardien/gardien.component';
+import { FournisseurComponent } from './components/fournisseur/fournisseur.component';
+ import { GardienComponent } from './components/gardien/gardien.component';
  import { LogbookSMaintenanceComponent } from './components/logbook-s-maintenance/logbook-s-maintenance.component';
 import { LogbookSuiviRCourriersComponent } from './components/logbook-suivi-r-courriers/logbook-suivi-r-courriers.component';
 import { LogbookgrComponent } from './components/logbookgr/logbookgr.component';
@@ -19,10 +19,8 @@ children:[
     path: '',
     component: GardienComponent,
   },
- {
-   path:'lsf',
-   component:LogbookgrComponent,
- },
+ 
+  
    {
     path:'logparc',
     component:LogbooksuiviParcRComponent,
@@ -31,7 +29,14 @@ children:[
 path:'logcour',
 component:LogbookSuiviRCourriersComponent,
   },
-  
+  {
+    path:'lsf',
+    component:LogbookgrComponent,
+  },
+  {
+    path:'fournisseur',
+    component:FournisseurComponent,
+  },
  
   {
     path:'logman',
@@ -45,13 +50,10 @@ component:LogbookSuiviRCourriersComponent,
     path:'chauffeur',
     component:ChauffeurComponent,
   },
-  {
-    path:'fournisseur',
-    component:FournisseursComponent,
-  },
+ 
   {
     path:'article',
-    component:ArticleComponent,
+    component:ArticlesComponent,
   }
 
   

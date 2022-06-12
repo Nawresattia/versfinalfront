@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Envoyer Message</h2>
+<mat-dialog-content class="mat-typography">
+
+    <div class="p-5">
+        <form class="user" style="width: 400px;">
+            <div class="form-group row">
+                <div class="col-sm-12 mb-3 mb-sm-0">
+                    <label for="reciver">Envoyer à</label><br>
+                    <select id="reciver" class="form-control" name="rec" [(ngModel)]="rec" (change)="getMsg()">
+                        <option *ngFor="let item of allusers;" value="{{item.id}}">{{item.nom}} {{item.prenom}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="open" style="
+            overflow-y: scroll;">
+                <div class="col-sm-12 mb-3 mb-sm-0">
+                    <a class="dropdown-item d-flex align-items-center" *ngFor="let item of selectedmsg;">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-file-alt text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="font-weight-bold" *ngIf="item.sender==sender">de toi</div>                                                      
+                            <div class="font-weight-bold" *ngIf="item.sender==rec">de {{recname}}</div>                           
+                            <div class="font-weight-bold" *ngIf="item.reciver==sender">à toi</div>                            
+                            <div class="font-weight-bold" *ngIf="item.reciver==rec">à {{recname}}</div> 
+                            <span class="small text-gray-500" style="word-break: breakall ;">{{item.msg}}</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="open">
+                <div class="col-sm-12">
+                    <label for="mmmss">Message</label><br>
+                    <textarea id="mmmss" class="form-control" placeholder="Message" name="msg" [(ngModel)]="msg">
+                    </textarea>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Annuler</button>
+    <button mat-button cdkFocusInitial (click)="Send()">Envoyer</button>
+</mat-dialog-actions>
