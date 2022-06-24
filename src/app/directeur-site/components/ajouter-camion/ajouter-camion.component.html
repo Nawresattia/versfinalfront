@@ -1,0 +1,38 @@
+<form>
+  <h2>Ajouter un Camion</h2>
+
+<div class="mb-3">
+ <label for="Nom" class="form-label"> Immatricule</label>
+ <input type="text" class="form-control" id="immatricule" size="15" aria-describedby="immatricule" name="immatricule" [(ngModel)]="immatricule">
+</div>
+<div class="mb-3">
+ <label for="Type" class="form-label"> Type</label>
+ <input type="text" class="form-control" id="type" size="15" aria-describedby="type" name="type" [(ngModel)]="type">
+</div>
+<div class="mb-3">
+ <label for="Taille" class="form-label">Taille</label>
+ <input type="text" class="form-control" id="taille" size="15" aria-describedby="taille" name="taille" [(ngModel)]="taille">
+</div>
+<!-- <div class="mb-3">
+ <label for="Chauffeur" class="form-label"> Chauffeur</label>
+ <input type="text" class="form-control" id="chauffeur" size="15" aria-describedby="chauffeur" name="chauffeur" [(ngModel)]="chauffeur">
+</div> -->
+<div class="mb-3">
+ <label  class="form-label">Liste Chauffeur</label>
+ <Select class="form-control" id="cauf"  name="chauffeur" ngDefaultControl [(ngModel)]="chauffeur" value="choisir">
+   <option  disabled> choisir</option>
+   <option  *ngFor="let s of listechau" value="{{s.nomchauffeur}}">{{s.nomchauffeur}} {{s.prenomchauffeur}}</option>
+ </Select>
+</div>
+
+
+
+
+
+<div class="modal-footer">
+<button  type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)='close()'>Annuler</button>
+<button  type="button" class="btn btn-primary" cdkFocusInitial (click) = 'create()' >Ajouter</button>
+
+</div>
+
+</form>

@@ -34,57 +34,60 @@ import { MatTreeModule } from '@angular/material/tree';
 import { DirecteurSiteRoutingModule } from './directeur-site-routing.module';
 import { DirecteurSiteComponent } from './directeur-site.component';
 
-import { CreateUserDialog, EditUserDialog, GardienComponent } from './components/gardien/gardien.component';
-import { CamionComponent, CreateCamionDialog, EditCamionDialog } from './components/camion/camion.component';
+import {   GardienComponent } from './components/gardien/gardien.component';
+import { CamionComponent } from './components/camion/camion.component';
 import { LogbooksuiviParcRComponent } from './components/logbooksuivi-parc-r/logbooksuivi-parc-r.component';
 import { LogbookSuiviRCourriersComponent } from './components/logbook-suivi-r-courriers/logbook-suivi-r-courriers.component';
 import { LogbookSMaintenanceComponent } from './components/logbook-s-maintenance/logbook-s-maintenance.component';
- 
- 
-import { ArticlesComponent, CreateArticleDialog, EditArticleDialog } from './components/article/article.component';
+
+
+import { ArticlesComponent } from './components/article/article.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { ChauffeurComponent, CreateChauffeurDialog, EditChauffeurDialog } from './components/chauffeur/chauffeur.component';
-import { CreateFournisseurDialog, EditFournisseurDialog, FournisseurComponent } from './components/fournisseur/fournisseur.component';
+import { ChauffeurComponent } from './components/chauffeur/chauffeur.component';
+import {   FournisseurComponent } from './components/fournisseur/fournisseur.component';
 import { LogbookgrComponent } from './components/logbookgr/logbookgr.component';
+import { AjouterCamionComponent } from './components/ajouter-camion/ajouter-camion.component';
+import { ModifierCamionComponent } from './components/modifier-camion/modifier-camion.component';
+import { AjouterArticleComponent } from './components/ajouter-article/ajouter-article.component';
+import { ModifierArticleComponent } from './components/modifier-article/modifier-article.component';
+import { ModifierFournisseurComponent } from './components/modifier-fournisseur/modifier-fournisseur.component';
+import { AjouterFournisseurComponent } from './components/ajouter-fournisseur/ajouter-fournisseur.component';
+import { AjouterChauffeurComponent } from './components/ajouter-chauffeur/ajouter-chauffeur.component';
+import { ModifierChauffeurComponent } from './components/modifier-chauffeur/modifier-chauffeur.component';
+import { AjouterGardienComponent } from './components/ajouter-gardien/ajouter-gardien.component';
+import { ModifierGardienComponent } from './components/modifier-gardien/modifier-gardien.component';
+
 
 
 @NgModule({
   declarations: [DirecteurSiteComponent,
-   
+
     GardienComponent,
-    EditUserDialog,
-    EditCamionDialog,
-    EditArticleDialog,
-    EditChauffeurDialog,
-     EditFournisseurDialog,
+
+
      LogbooksuiviParcRComponent,
     LogbookSuiviRCourriersComponent,
     LogbookSMaintenanceComponent,
     CamionComponent,
-    
-
     ChauffeurComponent,
-     
     ArticlesComponent,
-    CreateUserDialog,
-    CreateCamionDialog,
-    CreateChauffeurDialog,
-    CreateFournisseurDialog,
-    CreateArticleDialog,
+
+
     FournisseurComponent,
-    LogbookgrComponent],
+    LogbookgrComponent,
+    AjouterCamionComponent,
+    ModifierCamionComponent,
+    AjouterArticleComponent,
+    ModifierArticleComponent,
+    ModifierFournisseurComponent,
+    AjouterFournisseurComponent,
+    AjouterChauffeurComponent,
+    ModifierChauffeurComponent,
+    AjouterGardienComponent,
+    ModifierGardienComponent,
+  ],
   exports: [
-    EditUserDialog,
-    EditCamionDialog,
-    EditChauffeurDialog,
-    EditFournisseurDialog,
-    EditArticleDialog,
-    CreateUserDialog,
-    CreateCamionDialog,
-    CreateChauffeurDialog,
-    CreateFournisseurDialog,
-    CreateArticleDialog,
   ],
   imports: [
     CommonModule,

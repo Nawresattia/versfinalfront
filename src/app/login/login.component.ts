@@ -11,14 +11,14 @@ export class LoginComponent implements OnInit {
   password = ""; email = "";
   constructor(private router: Router, private load: LoadserviceService) { }
 
-  ngOnInit(): void { 
-    
+  ngOnInit(): void {
+
   }
 
   login() {
     if(this.email=="" && this.password=="")
     { this.load.openSnackBar("Email And Password can not be empty !!");}
-   else {     
+   else {
     var data = {
       "email": this.email,
       "pw": this.password

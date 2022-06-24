@@ -1,47 +1,46 @@
- 
+
     <div class="testbox">
-      <form action="/">
+      <form >
         <div class="banner">
           <h6><strong>Fiche de suivi la reception des fournisseur aziza </strong> </h6>
-         
+
         </div>
         <div class="item">
           <label for="entr"> Entrepot<span>*</span></label>
-          <input id="entr" type="text" name="tnr" required/>
+          <input id="entr" type="text" name="Entrepot" [(ngModel)]="Entrepot" required/>
         </div>
         <div class="colums">
           <div class="item">
             <label for="date"> Date<span>*</span></label>
-           <input id="date" type="date" name="date" />
+           <input id="date" type="date" name="dates"[(ngModel)]="dates" />
           </div>
-         
+
           <div class="item">
             <label for="frn"> Fournisseur<span>*</span></label>
-            <input id="frn" type="text"   name="frn" required/>
+            <input id="frn" type="text"   name="fournisseur"[(ngModel)]="fournisseur" required/>
           </div>
           <div class="item">
             <label for="tm">Heure d'arrivé<span>*</span></label>
-            <input id="tm" type="time"   name="tm" required/>
+            <input id="tm" type="time"   name="Heure_arrive"[(ngModel)]="Heure_arrive" required/>
           </div>
-          
+
           <div class="item">
             <label for="hr">Heure d'entré<span>*</span></label>
-            <input id="hr" type="time"   name="hr" required/>
+            <input id="hr" type="time"   name="Heure_entre"[(ngModel)]="Heure_entre" required/>
           </div>
-           
+
           <div class="item">
             <label for="hr">Heure de départ<span>*</span></label>
-            <input id="hr" type="time"   name="hr" required/>
+            <input id="hr" type="time"   name="Heure_depart"[(ngModel)]="Heure_depart" required/>
           </div>
-           
- 
-      
+
+
+
           <div class="btn-block">
-            <button  type="button" class="btn btn-primary" cdkFocusInitial (click) = 'create()' >enregistrer</button>    
+            <button  type="button" class="btn btn-primary" cdkFocusInitial (click) = 'create()' >enregistrer</button>
            </div>
         </div>
-        
-        
+
+
       </form>
     </div>
- 

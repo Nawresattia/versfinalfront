@@ -30,7 +30,7 @@ export class LgParcroulantComponent implements OnInit,AfterViewInit  {
   date = [this.All, this.dymdm.getHours(), this.dymdm.getMinutes()].join('-');
 
   displayedColumns: string[]  = ['id','Code','Date', 'Immatricule', 'Nom_chauffeur', 'Heure_sortie','N_plombage_sortie','Kilometrage_sortie','Heure_entre','N_plombage_entre','kilometrage_entre'];
-  
+
   dataSource;
 
 
@@ -59,12 +59,12 @@ export class LgParcroulantComponent implements OnInit,AfterViewInit  {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
+
 
 }
- 
-    
- 
+
+
+
 
 
 

@@ -1,46 +1,56 @@
 <form>
-  
-    <h2>Ajouter un gardin</h2>
+    <h2>Ajouter un Directeur General</h2>
     <div class="mb-3">
-   <label for="id" class="form-label"> Id gardien</label>
-   <input type="number" class="form-control" id="id" size="15" aria-describedby="id">
-  </div>
-  
+        <label for="nom" class="form-label"> nom</label>
+        <input type="text" class="form-control" id="nom" size="15" aria-describedby="nom" name="nomca" >
+        <input type="text"  class="form-control" name="nomca"  >
+       </div>
+</form>
+
+
+
+
+<!-- <form>
+
+    <h2>Ajouter un Directeur General</h2>
+
   <div class="mb-3">
-    <label for="Nom" class="form-label"> Nom Gardien</label>
-    <input type="text" class="form-control" id="name" size="15" aria-describedby="name">
-   </div>
-  
-  
-   <div class="mb-3">
-    <label for="Email" class="form-label">Eamil </label>
-    <input type="email" class="form-control" id="email" size="15" aria-describedby="email">
-   </div>
-  
-  
-   <div class="mb-3">
-    <label for="site "> choisir un site site</label>
-  <select name="site" id="site">
-    <option value="bouargoub">bouargoub</option>
-    <option value="sahline">sahline</option>
-    <option value="Ben arous">Ben arous</option>
-    <option value="manzel tmim">manzel tmim</option>
-  </select>
-   </div>
-  
-   <div class="mb-3">
-    <label for="tel" class="form-label"> telephone gardien</label>
-    <input type="tel" class="form-control" id="tel" size="15" aria-describedby="tel">
+    <label for="nom" class="form-label"> nom</label>
+    <input type="text" class="form-control" id="nom" size="15" aria-describedby="nom" name="nomfr" [(ngModel)]="nomfr">
    </div>
 
-  
+
+
+   <div class="mb-3">
+    <label for="email" class="form-label"> email </label>
+    <input type="text" class="form-control" id="email" size="15" aria-describedby="email" name="emailfr" [(ngModel)]="emailfr">
+   </div>
+
+   <div class="mb-3">
+    <label for="prenom" class="form-label"> prenom </label>
+    <input type="text" class="form-control" id="prenom" size="15" aria-describedby="prenom" name="prenomfr" [(ngModel)]="prenomfr" >
+   </div>
+
+   <div class="mb-3">
+    <label for="tel" class="form-label"> tel </label>
+    <input type="number" class="form-control" id="tel" size="15" aria-describedby="tel" name="telfr" [(ngModel)]="telfr">
+   </div>
+
+   <div class="mb-3">
+    <label for="site" class="form-label"> site </label>
+    <input type="text" class="form-control" id="site" size="15" aria-describedby="site" name="sitefr" [(ngModel)]="sitefr">
+   </div>
+
+   <div class="mb-3">
+    <label for="prenom" class="form-label">password </label>
+    <input type="text" class="form-control" id="password" size="15" aria-describedby="password" name="passwordfr"[(ngModel)]="passwordfr">
+   </div>
+
+
    <div class="modal-footer">
    <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-   <button  type="button" class="btn btn-primary" >ajouter</button>
-  
+   <button  type="button" class="btn btn-primary" cdkFocusInitial (click) = 'create()'>ajouter</button>
+
    </div>
-  
-  </form>
-  
-  
-   
+
+  </form> -->

@@ -1,8 +1,11 @@
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ModifierGardienComponent } from './../modifier-gardien/modifier-gardien.component';
+import { AjouterGardienComponent } from './../ajouter-gardien/ajouter-gardien.component';
+import { AfterViewInit, Component,  OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
- 
+
 import { LoadserviceService } from 'src/Services/loadservice.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UserServiceService } from 'src/app/Services/user-service.service';
 
 export interface PeriodicElement {
   id: number;
@@ -12,6 +15,7 @@ export interface PeriodicElement {
   tel: string;
   site: string;
   logoutdate: string;
+  role:string;
 }
 
 @Component({
@@ -33,7 +37,7 @@ export class GardienComponent implements OnInit, AfterViewInit {
   dataSource;
 
 
-  constructor(public load: LoadserviceService, public dialog: MatDialog) { }
+  constructor(public load: LoadserviceService, public dialog: MatDialog, private userservice:UserServiceService) { }
 
   ngOnInit(): void {
     this.getAll();
@@ -53,7 +57,7 @@ export class GardienComponent implements OnInit, AfterViewInit {
   }
 
   create(){
-    this.dialog.open(CreateUserDialog, {
+    this.dialog.open(AjouterGardienComponent, {
       height: '95',
       width: '95',
     });
@@ -65,23 +69,18 @@ export class GardienComponent implements OnInit, AfterViewInit {
   }
   delet(id) {
     console.log(id)
-    if (confirm("Etes-vous sûr!") == true) {
-      this.load.post({ "userid": id }, "DeleteUser").then(
-        (data: any) => {
-          console.log(data);
-          if (data.key == "true") {
-            this.load.openSnackBar("Suppression effectué avec succé");
-            this.getAll()
-          }
-          else this.load.openSnackBar("Erreur")
 
-        });
+    if (confirm("Sure You want to delete this directeur de site!") == true) {
+      this.userservice.DeleteUser(id).subscribe(data=>{
+        console.log(data)
+        this.getAll()
+      },error=>console.log(error));
+
     } else { }
 
-  }
-  edit(id) {
+  }  edit(id) {
     console.log(id)
-    this.dialog.open(EditUserDialog, {
+    this.dialog.open(ModifierGardienComponent, {
       height: '95',
       width: '95',
       data: id,
@@ -90,104 +89,10 @@ export class GardienComponent implements OnInit, AfterViewInit {
   }
 
 }
- 
- 
- 
-@Component({
-  selector: 'dialog-update-user',
-  templateUrl: 'edit-pop.html',
-})
-export class EditUserDialog {
-  nom: any="";
-  email: any="";
-  prenom: any="";
-  site: any="";
-  tel: any="";
-  date: any="";
-  password: any="";
-  constructor(public dialogRef: MatDialogRef<EditUserDialog>,
-    @Inject(MAT_DIALOG_DATA) public data, public load: LoadserviceService) { }
-  close() {
-    this.dialogRef.close();
-  }
-  update() {
-    console.log(this.data)
-    console.log('test')
-    let senddata =
-    {
-      "userid": this.data,
-      "nom": this.nom,
-      "email": this.email,
-      "prenom": this.prenom,
-      "tel": this.tel,
-      "site": this.site,
-      "date": this.date,
-      "password": this.password,
-    };
-    if(this.data==null && this.nom=="" && this.prenom=="" && this.tel=="" && this.site=="" && this.date=="" && this.password=="")
-    {this.load.openSnackBar("mettre à jour au moin un champ");}
-   else {
-    this.load.post(senddata, "UpdateUser").then(
-      (data: any) => {
-        console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("Mise à jour effectué avec succé"); }
-        else this.load.openSnackBar("Erreur");
-
-      });
-   }
-   
-  }
-}
 
 
 
 
-@Component({
-  selector: 'dialog-create-user',
-  templateUrl: 'create-pop.html',
-})
-export class CreateUserDialog {
-  nom: any="";
-  email: any="";
-  prenom: any="";
-  site: any="";
-  tel: any="";
-  date: any="";
-  password: any="";
 
-  constructor(public dialogRef: MatDialogRef<CreateUserDialog>,
-    
-  public load: LoadserviceService) { }
-  close() {
-    this.dialogRef.close();
-  }
-  //
-  create() {
-    
-    let senddata =
-    {
-      "nom": this.nom,
-      "email": this.email,
-      "prenom": this.prenom,
-      "tel": this.tel,
-      "site": this.site,
-      "password": this.password,
-    };
-    console.log(senddata);
-    if(this.nom=="" || this.email=="" || this.prenom=="" || this.tel=="" || this.site=="" || this.password=="")
-    {this.load.openSnackBar("Veuillez remplir toutes les entrées");}
-   else {
-    console.log(senddata);
-    this.load.post(senddata, "CreateUser").then(
-      (data: any) => {
-        console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("ajout effectué avec succé"); }
-        else this.load.openSnackBar("Erreur");
-
-      });
-   }
-  }
-  
-}
 
 

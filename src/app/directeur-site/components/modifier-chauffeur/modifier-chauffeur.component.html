@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Update Chauffeur </h2>
+<mat-dialog-content class="mat-typography">
+
+    <div class="p-5">
+        <form class="user">
+
+            <div class="form-group row">
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="nomchauffeur" name="nomchauffeur" [(ngModel)]="nomchauffeur">
+                </div>
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="prenomchauffeur" name="prenomchauffeur" [(ngModel)]="prenomchauffeur">
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="site" name="site" [(ngModel)]="site">
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="cin" name="cin" [(ngModel)]="cin">
+                </div>
+                <div class="col-sm-6">
+                    <input type="tel" class="form-control" placeholder="tel" name="Chauffeur" [(ngModel)]="tel">
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+<button mat-button mat-dialog-close (click)="close()">Cancel</button>
+<button mat-button  cdkFocusInitial (click)="update()">Update</button>
+</mat-dialog-actions>

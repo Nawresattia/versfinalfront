@@ -41,10 +41,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadserviceService } from 'src/Services/loadservice.service';
 import { MessangerComponent } from './messanger/messanger.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    MessangerComponent
+    MessangerComponent,
+
   ],
   exports: [MessangerComponent],
   schemas: [

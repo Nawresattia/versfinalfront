@@ -1,0 +1,36 @@
+<form>
+
+  <h2>Ajouter un article</h2>
+  <!-- <div class="mb-3">
+ <label for="id" class="form-label"> Id </label>
+ <input type="number" class="form-control" id="id" size="15" aria-describedby="id">
+</div> -->
+
+<div class="mb-3">
+  <label for="code" class="form-label"> code</label>
+  <input type="text" class="form-control" id="code" size="15" aria-describedby="code" name="codes" [(ngModel)]="code">
+ </div>
+
+
+
+ <div class="mb-3">
+  <label for="Intitule" class="form-label"> Intitule </label>
+  <input type="text" class="form-control" id="Intitule" size="15" aria-describedby="Intitule" name="intitule" [(ngModel)]="intitule">
+ </div>
+
+ <div class="mb-3">
+  <label for="Fournisseur" class="form-label"> fournisseur </label>
+  <Select class="form-control" id="fournisseurs"   name="fournisseurs" ngDefaultControl [(ngModel)]="fournisseurs" value="choisir">
+    <option selected value="" disabled> choisir</option>
+    <option  *ngFor="let s of listefau" value="{{s.type}}">{{s.type}} </option>
+  </Select>
+ </div>
+
+
+ <div class="modal-footer">
+ <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Annuler</button>
+ <button  type="button" class="btn btn-primary" cdkFocusInitial (click) = 'create()'>ajouter</button>
+
+ </div>
+
+</form>

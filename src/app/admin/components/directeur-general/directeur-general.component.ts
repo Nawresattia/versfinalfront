@@ -1,19 +1,21 @@
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserServiceService } from 'src/app/Services/user-service.service';
 import { LoadserviceService } from 'src/Services/loadservice.service';
 
 
 export interface PeriodicElement {
   id: number;
-  name: string;
-  lastname:string;
+  nom: string;
+  prenom:string;
   email: string;
   site:string;
   tel:number;
    dernier_connexion:string;
-   
+
   }
 @Component({
   selector: 'app-directeur-general',
@@ -24,18 +26,18 @@ export interface PeriodicElement {
 
 export class DirecteurGeneralAdminComponent implements OnInit, AfterViewInit {
 
-  
+
   dymdm = new Date();
   All = [this.dymdm.getFullYear(), this.dymdm.getMonth() + 1, this.dymdm.getDate()].join('/');
   date = [this.All, this.dymdm.getHours(), this.dymdm.getMinutes()].join('-');
-  
+
   displayedColumns: string[] = ['id', 'email', 'nom', 'prenom', 'tel', 'site', 'logoutdate', "actions"]
 
 
   dataSource;
 
-
-  constructor(public load: LoadserviceService, public dialog: MatDialog) { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor(public load: LoadserviceService, public dialog: MatDialog, private userservice:UserServiceService) { }
 
   ngOnInit(): void {
     this.getAll();
@@ -45,13 +47,19 @@ export class DirecteurGeneralAdminComponent implements OnInit, AfterViewInit {
 
 
   getAll() {
-    this.load.get("Alldirs").then(
+    this.load.get("Alldirg").then(
       (data: any) => {
         //this.ELEMENT_DATA=data;
         console.log(data);
         this.dataSource = new MatTableDataSource<PeriodicElement>(data);
       }
     );
+  }
+  create(){
+    this.dialog.open(CreateUserDialog, {
+      height: '95',
+      width: '95',
+    });
   }
 
   applyFilter(event: Event) {
@@ -60,17 +68,13 @@ export class DirecteurGeneralAdminComponent implements OnInit, AfterViewInit {
   }
   delet(id) {
     console.log(id)
-    if (confirm("Sure You want to delete this user!") == true) {
-      this.load.post({ "userid": id }, "DeleteUser").then(
-        (data: any) => {
-          console.log(data);
-          if (data.key == "true") {
-            this.load.openSnackBar("Delete Done");
-            this.getAll()
-          }
-          else this.load.openSnackBar("Error")
 
-        });
+    if (confirm("Sure You want to delete this directeur general!") == true) {
+      this.userservice.DeleteUser(id).subscribe(data=>{
+        console.log(data)
+        this.getAll()
+      },error=>console.log(error));
+
     } else { }
 
   }
@@ -96,10 +100,27 @@ export class EditUserDialog {
   prenom: any="";
   site: any="";
   tel: any="";
-  date: any="";
-  password: any="";
+  creatdate: any="";
+  passwordfr: any="";
   constructor(public dialogRef: MatDialogRef<EditUserDialog>,
-    @Inject(MAT_DIALOG_DATA) public data, public load: LoadserviceService) { }
+    @Inject(MAT_DIALOG_DATA) public data,private userservice:UserServiceService ,public load: LoadserviceService)
+    {  console.log(data);
+      this.userservice.getUserById(this.data).subscribe(dirg=>{
+        console.log(dirg)
+        this.prenom=dirg.prenom
+        this.nom=dirg.nom
+        this.creatdate=dirg.datecreat
+        this.email=dirg.email
+        this.site=dirg.site
+        this.tel=dirg.tel
+        this.passwordfr=dirg.password
+      },error=>console.log(error));
+
+
+    }
+  affiche(){
+
+  }
   close() {
     this.dialogRef.close();
   }
@@ -113,10 +134,10 @@ export class EditUserDialog {
       "prenom": this.prenom,
       "tel": this.tel,
       "site": this.site,
-      "date": this.date,
-      "password": this.password,
+      "creatdate": this.creatdate,
+      "password": this.passwordfr,
     };
-    if(this.data==null && this.nom=="" && this.prenom=="" && this.tel=="" && this.site=="" && this.date=="" && this.password=="")
+    if(this.data==null && this.nom=="" && this.prenom=="" && this.tel=="" && this.site=="" && this.creatdate=="" && this.passwordfr=="")
     {this.load.openSnackBar("Please Update at least one input");}
    else {
     this.load.post(senddata, "UpdateUser").then(
@@ -129,6 +150,71 @@ export class EditUserDialog {
    }
   }
 }
+
+@Component({
+  selector: 'dialog-create-directeurgeneral',
+  templateUrl: 'create-popup.html',
+  providers:[DatePipe]
+})
+export class CreateUserDialog {
+ nomca:any="";
+      // nomdir:  any="";
+      // emailfr: any="";
+      // prenomfr:  any="";
+      // telfr:  any="";
+      // sitefr:  any="";
+       creatdate:  any="";
+      // passwordfr:  any="";
+       date=new Date();
+  constructor(private datepipe:DatePipe,public dialogRef: MatDialogRef<CreateUserDialog>,
+
+  public load: LoadserviceService,private userservice:UserServiceService)
+  {
+    this.creatdate=this.datepipe.transform(this.date,"yyyy-MM-dd")
+
+   }
+
+  close() {
+    this.dialogRef.close();
+  }
+  create(){
+
+    let senddata =
+    {
+      // "nom": this.nomfr,
+      // "email": this.emailfr,
+      // "prenom": this.prenomfr,
+      // "tel": this.telfr,
+      // "site": this.sitefr,
+      // "role": "directeur-general",
+      // "datecreat": this.creatdate,
+      // "password": this.passwordfr,
+
+    };
+    console.log(senddata);
+     //if(this.nomfr=="" && this.prenomfr=="" && this.telfr=="" && this.sitefr=="" && this.creatdate=="" && this.passwordfr=="")
+    {this.load.openSnackBar("Veuillez remplir toutes les entrées");}
+   //else {
+    console.log(senddata);
+    this.userservice.InsertUser(senddata).subscribe(data=>{
+      console.log(data)
+
+      alert("ajouter")
+      this.close ()
+    },error=>{
+      console.log(error)
+      alert("error")
+    });
+
+  // }
+  }
+}
+
+
+
+
+
+
 
 
 

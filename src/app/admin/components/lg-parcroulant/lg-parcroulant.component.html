@@ -1,11 +1,11 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-     
+
   </div>
 
-  <!-- Content Row 
-        
+  <!-- Content Row
+
          <th scope="col">DirecteurSiteID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
@@ -30,7 +30,7 @@
 
 
 
-        
+
 <!-- Position Column -->
 <ng-container matColumnDef="id">
 <th mat-header-cell *matHeaderCellDef>Id </th>
@@ -42,7 +42,7 @@
 <td mat-cell *matCellDef="let element"> {{element.code}} </td>
 </ng-container>
 
-            
+
             <!-- Position Column -->
             <ng-container matColumnDef="Date">
               <th mat-header-cell *matHeaderCellDef>Date </th>
@@ -52,7 +52,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="Immatricule">
               <th mat-header-cell *matHeaderCellDef> Immatricule </th>
-              <td mat-cell *matCellDef="let element"> {{element.immatricule}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.camion}} </td>
             </ng-container>
 
             <!-- Weight Column -->
@@ -100,8 +100,8 @@
 
 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onEdit(row.Date)"></tr>
- 
- 
+
+
 </table>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtonsaria-label="Select page of periodic elements">

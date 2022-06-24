@@ -1,16 +1,20 @@
+import { ModifierCamionComponent } from './../modifier-camion/modifier-camion.component';
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { CamionServiceService } from 'src/app/Services/camion-service.service';
 import { LoadserviceService } from 'src/Services/loadservice.service';
+import { AjouterCamionComponent } from '../ajouter-camion/ajouter-camion.component';
 
 
 export interface PeriodicElement {
   id: number;
- Immatricule: string;
- Type: string;
-  Taille: string;
+  immatricule: string;
+  type: string;
+  taille: string;
   Chauffeur: string;
-  Datecreation: string;
+  datecreation: string;
 }
 
 
@@ -28,15 +32,15 @@ export class CamionComponent implements OnInit,AfterViewInit {
 
 
   displayedColumns: string[] = ['id', 'immatricule','type', 'taille','chauffeur','datecreation', "actions"];
-    
+
 
 
    dataSource;
 
-  
-    
-  constructor(public load: LoadserviceService, public dialog: MatDialog) { }
- 
+
+
+  constructor(public load: LoadserviceService, public dialog: MatDialog, private camionservice:CamionServiceService) { }
+
   ngOnInit(): void {
 
     this.getAll();
@@ -46,47 +50,43 @@ export class CamionComponent implements OnInit,AfterViewInit {
   }
 
 
-  
+
   getAll (){
     this.load.get("AllCamion").then(
-      (data:any) => {        
+      (data:any) => {
         //this.ELEMENT_DATA=data;
         console.log(data);
         this.dataSource = new MatTableDataSource<PeriodicElement>(data);
       }
   );}
   create(){
-    this.dialog.open(CreateCamionDialog, {
+    this.dialog.open(AjouterCamionComponent, {
       height: '95',
       width: '95',
     });
   }
- 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   delet(id) {
     console.log(id)
-    if (confirm("Sure You want to delete this camion!") == true) {
-      this.load.post({ "Camionid": id }, "DeleteCamion").then(
-        (data: any) => {
-          console.log(data);
-          if (data.key == "true") {
-            this.load.openSnackBar("Delete Done");
-            this.getAll()
-          }
-          else this.load.openSnackBar("Error")
 
-        });
+    if (confirm("Sure You want to delete this camion!") == true) {
+      this.camionservice.DeleteCamion(id).subscribe(data=>{
+        console.log(data)
+        this.getAll()
+      },error=>console.log(error));
+
     } else { }
 
   }
-   
+
 
   edit(id) {
     console.log(id)
-    this.dialog.open(EditCamionDialog, {
+    this.dialog.open(ModifierCamionComponent, {
       height: '95',
       width: '95',
       data: id,
@@ -97,93 +97,8 @@ export class CamionComponent implements OnInit,AfterViewInit {
 }
 
 
-@Component({
-  selector: 'dialog-update-camion',
-  templateUrl: './edits-pop.html',
-})
-
-export class EditCamionDialog {
-  id:any;
-  immatricule: any;
-  type: any;
-  taille: any;
-  chauffeur: any;
-  datecreation: any;
-  
-
- 
-  constructor(public dialogRef: MatDialogRef<EditCamionDialog>,
-    @Inject(MAT_DIALOG_DATA) public data, public load: LoadserviceService) { }
-  close() {
-    this.dialogRef.close();
-  }
-
-   update() {
-    console.log(this.data)
-    let senddata =
-    {
- 
-      "camionid": this.data,
-      "Immatricule": this.immatricule,
-      "Type": this.type,
-      "Taille": this.taille,
-      "Chauffeur": this.chauffeur,
-      "Datecreation": this.datecreation,
-      
-    };
-    if(this.data==null && this.immatricule=="" && this.type=="" && this.taille=="" && this.chauffeur=="" && this.datecreation=="" )
-    {this.load.openSnackBar("Please Update at least one input");}
-   else {
-    this.load.post(senddata, "UpdateCamion").then(
-      (data: any) => {
-        console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("Updated Done"); }
-        else this.load.openSnackBar("Error");
-
-      });
-   }
-  }
-}
 
 
-@Component({
-  selector: 'dialog-create-camion',
-  templateUrl: 'create-pop.html',
-})
-export class CreateCamionDialog {
-  immatricule: any="";
-  type: any="";
-  taille: any="";
-  chauffeur: any="";
-  datecreation: any="";
 
-  constructor(public dialogRef: MatDialogRef<CreateCamionDialog>,
-    
-  public load: LoadserviceService) { }
-  close() {
-    this.dialogRef.close();
-  }
-  create(){
-    let senddata =
-    {
-      "Immatricule": this.immatricule,
-      "Type": this.type,
-      "Taille": this.taille,
-      "Chauffeur": this.chauffeur,
-      "Datecreation": this.datecreation,
-    };
-    if(this.immatricule=="" || this.type=="" || this.taille=="" || this.chauffeur=="" || this.datecreation=="")
-    {this.load.openSnackBar("Please Fill in all inputs");}
-   else {
-    this.load.post(senddata, "CreateCamion").then(
-      (data: any) => {
-        console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("Create Done"); }
-        else this.load.openSnackBar("Error");
-
-      });
-   }
-  }
-}
 
 

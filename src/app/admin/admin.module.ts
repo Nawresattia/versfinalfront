@@ -1,9 +1,9 @@
+
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
- import { DirecteurGeneralAdminComponent, EditUserDialog } from './components/directeur-general/directeur-general.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
@@ -41,21 +41,41 @@ import { LogbookfazizaComponent } from './components/logbookfaziza/logbookfaziza
  import { LgParcroulantComponent } from './components/lg-parcroulant/lg-parcroulant.component';
  import { LgRCourriersComponent } from './components/lg-rcourriers/lg-rcourriers.component';
 import { LgbMaintenanceComponent } from './components/lgb-maintenance/lgb-maintenance.component';
-import { DirecteurSiteAdminComponent } from './components/directeur-site/directeur-site.component';
-import { FormsModule } from '@angular/forms';
- 
+import { CreateUserDialog, DirecteurSiteAdminComponent, } from './components/directeur-site/directeur-site.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditUserDialog, DirecteurGeneralAdminComponent } from './components/directeur-general/directeur-general.component';
+import { DirecteurGeneralsComponent } from './components/directeur-generals/directeur-generals.component';
+import { AjoutDirecteurGeneralsComponent } from './components/ajout-directeur-generals/ajout-directeur-generals.component';
+import { ModifierDirecteurSiteComponent } from './components/modifier-directeur-site/modifier-directeur-site.component';
+import { ModifierDirecteurGeneralsComponent } from './components/modifier-directeur-generals/modifier-directeur-generals.component';
+
 
 @NgModule({
-  declarations: [AdminComponent, DirecteurGeneralAdminComponent, DirecteurSiteAdminComponent,EditUserDialog,
-     DashboardComponent, LogbookfazizaComponent, LgParcroulantComponent, LgRCourriersComponent, LgbMaintenanceComponent],
+  declarations: [AdminComponent,
+DirecteurGeneralAdminComponent,
+      DirecteurSiteAdminComponent,
+      EditUserDialog,
+     DashboardComponent,
+     LogbookfazizaComponent,
+      LgParcroulantComponent,
+       LgRCourriersComponent,
+        LgbMaintenanceComponent,
+        CreateUserDialog,
+        DirecteurGeneralsComponent,
+        AjoutDirecteurGeneralsComponent,
+        ModifierDirecteurSiteComponent,
+        ModifierDirecteurGeneralsComponent],
      exports: [
-      EditUserDialog, 
+      EditUserDialog,
+      CreateUserDialog,
     ],
-  
+
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    AdminRoutingModule,    
+    AdminRoutingModule,
     MatCheckboxModule,
     MatDatepickerModule,
     MatFormFieldModule,
@@ -88,7 +108,11 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule
-  ]
-  
+  ],
+  entryComponents: [MatDialogModule],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
+
 })
 export class AdminModule { }

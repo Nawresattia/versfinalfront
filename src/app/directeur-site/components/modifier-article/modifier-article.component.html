@@ -1,20 +1,20 @@
 
 <h2 mat-dialog-title>Update Article</h2>
 <mat-dialog-content class="mat-typography">
-    
+
     <form class="Article">
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="number" class="form-control" placeholder="Id" name="Id" [(ngModel)]="id"> 
+                <input type="number" class="form-control" placeholder="Id" name="Id" [(ngModel)]="id">
             </div>
             <div class="col-sm-6">
                 <input type="text" class="form-control" placeholder="code" name="code" [(ngModel)]="code">
             </div>
             <div class="col-sm-6">
-                <input type="text" class="form-control" placeholder="Intitule" name="Intitule" [(ngModel)]="Intitule">
+                <input type="text" class="form-control" placeholder="intitule" name="Intitule" [(ngModel)]="Intitule">
             </div>
             <div class="col-sm-6">
-                <input type="text" class="form-control" placeholder="Fournisseur" name="Fournisseur" [(ngModel)]="Fournisseur">
+                <input type="text" class="form-control" placeholder="fournisseur" name="Fournisseur" [(ngModel)]="Fournisseur">
             </div>
             <div class="col-sm-6">
             <input type="date" class="form-control" placeholder="Datecreation" name="Datecreation" [(ngModel)]="Datecreation">
@@ -23,6 +23,6 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Annuler</button>
+    <button mat-button mat-dialog-close (click)="close()">Annuler</button>
   <button mat-button  cdkFocusInitial (click)="update()">Modifer</button>
 </mat-dialog-actions>

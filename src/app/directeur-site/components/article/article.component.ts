@@ -1,6 +1,10 @@
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ModifierArticleComponent } from './../modifier-article/modifier-article.component';
+import { AjouterArticleComponent } from './../ajouter-article/ajouter-article.component';
+
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ArticleServiceService } from 'src/app/Services/article-service.service';
 import { LoadserviceService } from 'src/Services/loadservice.service';
 
 
@@ -10,7 +14,7 @@ export interface PeriodicElement {
  Intitule: String;
  Fournisseur: String;
  Datecreation:string;
-  
+
 }
 
 @Component({
@@ -27,12 +31,12 @@ export class ArticlesComponent implements OnInit,AfterViewInit {
   displayedColumns: string[] = ['Id', 'code','Intitule', 'Fournisseur','Datecreation', 'actions'];
  //{id: 1, code: '44774', intitule: 'Hi first in', fournisseurs: Array(0), datecreation: '2022-05-11T00:04:39.000+00:00'}
   dataSource;
- 
 
 
-   
-  constructor(public load:LoadserviceService, public dialog: MatDialog) { }
- 
+
+
+  constructor(public load:LoadserviceService, public dialog: MatDialog, private articleservice:ArticleServiceService) { }
+
   ngOnInit(): void {
     this.getAll();
   }
@@ -41,7 +45,7 @@ export class ArticlesComponent implements OnInit,AfterViewInit {
 
   getAll(){
     this.load.get("AllArticle").then(
-      (data:any) => {        
+      (data:any) => {
         //this.ELEMENT_DATA=data;
         console.log(data);
         this.dataSource = new MatTableDataSource<PeriodicElement>(data);
@@ -49,35 +53,31 @@ export class ArticlesComponent implements OnInit,AfterViewInit {
   );
   }
   create(){
-    this.dialog.open(CreateArticleDialog, {
+    this.dialog.open(AjouterArticleComponent, {
       height: '95',
       width: '95',
     });
   }
-    
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   delet(id) {
     console.log(id)
-    if (confirm("Sure You want to delete this user!") == true) {
-      this.load.post({ "userid": id }, "DeleteUser").then(
-        (data: any) => {
-          console.log(data);
-          if (data.key == "true") {
-            this.load.openSnackBar("Delete Done");
-            this.getAll()
-          }
-          else this.load.openSnackBar("Error")
 
-        });
+    if (confirm("Sure You want to delete this article!") == true) {
+      this.articleservice.DeleteArticle(id).subscribe(data=>{
+        console.log(data)
+        this.getAll()
+      },error=>console.log(error));
+
     } else { }
 
   }
   edit(id) {
     console.log(id)
-    this.dialog.open(EditArticleDialog, {
+    this.dialog.open(ModifierArticleComponent, {
       height: '95',
       width: '95',
       data: id,
@@ -86,89 +86,9 @@ export class ArticlesComponent implements OnInit,AfterViewInit {
   }
 
 }
- 
- 
- 
-@Component({
-  selector: 'dialog-update-article',
-  templateUrl: 'edit-pop.html',
-})
- 
-export class EditArticleDialog {
-  id:any="";
-  code: any="";
-  Intitule: any="";
-  Fournisseur: any="";
-  Datecreation: any="";
-  
-  constructor(public dialogRef: MatDialogRef<EditArticleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data, public load: LoadserviceService) { }
-  close() {
-    this.dialogRef.close();
-  }
-  update() {
-    console.log(this.data)
-    let senddata =
-    {
-      "articleid": this.data,
-      "code": this.code,
-      "Intitule": this.Intitule,
-      "Fournisseur": this.Fournisseur,
-      "Datecreation": this.Datecreation,
-      
-    };
-    if(this.data==null && this.code=="" && this.Intitule=="" && this.Fournisseur==""   && this.Datecreation=="" )
-    {this.load.openSnackBar("Please Update at least one input");}
-   else {
-    this.load.post(senddata, "UpdateArticle").then(
-      (data: any) => {
-        console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("Updated Done"); }
-        else this.load.openSnackBar("Error");
 
-      });
-   }
-  }
-}
-@Component({
-  selector: 'dialog-create-article',
-  templateUrl: 'create-pop.html',
-})
-export class CreateArticleDialog {
-  code: any="";
-  Intitule: any="";
-  Fournisseur:any="";
-  Datecreation: any="";
-  
 
-  constructor(public dialogRef: MatDialogRef<CreateArticleDialog>,
-    
-  public load: LoadserviceService) { }
-  close() {
-    this.dialogRef.close();
-  }
-  create(){
-    let senddata =
-    {
-       "code": this.code,
-      "Intitule": this.Intitule,
-      "Fournisseur": this.Fournisseur,
-       "Datecreation":this.Datecreation,
-      
-    };
-    if(this.code=="" || this.Intitule=="" || this.Fournisseur==""|| this.Datecreation=="")
-    {this.load.openSnackBar("Please Fill in all inputs");}
-   else {
-    this.load.post(senddata, "CreateArticle").then(
-      (data: any) => {
-        console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("Create Done"); }
-        else this.load.openSnackBar("Error");
 
-      });
-   }
-  }
-}
 
 
 

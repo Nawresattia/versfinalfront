@@ -1,6 +1,10 @@
+import { AjouterChauffeurComponent } from './../ajouter-chauffeur/ajouter-chauffeur.component';
+import { ModifierChauffeurComponent } from './../modifier-chauffeur/modifier-chauffeur.component';
+
 import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ChauffeurServiceService } from 'src/app/Services/chauffeur-service.service';
 import { LoadserviceService } from 'src/Services/loadservice.service';
 
 
@@ -12,7 +16,7 @@ export interface PeriodicElement {
   cin: String;
   tel:string;
   createdat:string;
-  
+
 }
 @Component({
   selector: 'app-chauffeur',
@@ -26,31 +30,31 @@ export class ChauffeurComponent implements OnInit,AfterViewInit {
   date = [this.All, this.dymdm.getHours(), this.dymdm.getMinutes()].join('-');
 
   displayedColumns: string[] = ['Id', 'nomchauffeur','prenomchauffeur', 'site','cin','tel','createdat',"actions"];
-   dataSource; 
+   dataSource;
 
- 
 
-   
-  constructor(public load:LoadserviceService, public dialog: MatDialog) { }
- 
+
+
+  constructor(public load:LoadserviceService, public dialog: MatDialog,private chauffeurservice:ChauffeurServiceService) { }
+
   ngOnInit(): void {
     this.getAll();
   }
   ngAfterViewInit(): void {
   }
 
-  
+
   getAll(){
     this.load.get("AllChauffeur").then(
-      (data:any) => {        
+      (data:any) => {
         //this.ELEMENT_DATA=data;
         console.log(data);
         this.dataSource = new MatTableDataSource<PeriodicElement>(data);
       }
   );}
-    
+
   create(){
-    this.dialog.open(CreateChauffeurDialog, {
+    this.dialog.open(AjouterChauffeurComponent, {
       height: '95',
       width: '95',
     });
@@ -63,22 +67,17 @@ export class ChauffeurComponent implements OnInit,AfterViewInit {
   delet(id) {
     console.log(id)
     if (confirm("Sure You want to delete this chauffeur!") == true) {
-      this.load.post({ "chauffeurId": id }, "DeleteChauffeur").then(
-        (data: any) => {
-          console.log(data);
-          if (data.key == "true") {
-            this.load.openSnackBar("Delete Done");
-            this.getAll()
-          }
-          else this.load.openSnackBar("Error")
+      this.chauffeurservice.DeleteChauffeur(id).subscribe(data=>{
+        console.log(data)
+        this.getAll()
+      },error=>console.log(error));
 
-        });
     } else { }
 
   }
   edit(id) {
     console.log(id)
-    this.dialog.open(EditChauffeurDialog, {
+    this.dialog.open(ModifierChauffeurComponent, {
       height: '95',
       width: '95',
       data: id,
@@ -88,97 +87,6 @@ export class ChauffeurComponent implements OnInit,AfterViewInit {
 
 }
 
-
-@Component({
-  selector: 'dialog-update-chauffeur',
-  templateUrl: './edit-pop.html',
-})
-
-export class EditChauffeurDialog {
-  nomchauffeur: any;
-  prenomchauffeur: any;
-  site:any;
-  cin: any;
-  tel: any;
-  createdat:any;
-
- 
-  constructor(public dialogRef: MatDialogRef<EditChauffeurDialog>,
-    @Inject(MAT_DIALOG_DATA) public data, public load: LoadserviceService) { }
-  close() {
-    this.dialogRef.close();
-  }
-
-   update() {
-    console.log(this.data)
-    let senddata =
-    {
- 
-      "chauffeurId": this.data,
-      "nomchauffeur": this.nomchauffeur,
-      "prenomchauffeur": this.prenomchauffeur,
-      "site": this.site,
-      "cin": this.cin,
-       "createdat":this.createdat,
-      
-    };
-    if(this.data==null && this.nomchauffeur=="" && this.prenomchauffeur=="" && this.site=="" && this.cin=="" && this.createdat=="" )
-    {this.load.openSnackBar("Please Update at least one input");}
-   else {
-    this.load.post(senddata, "UpdateUser").then(
-      (data: any) => {
-        console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("Updated Done"); }
-        else this.load.openSnackBar("Error");
-
-      });
-   }
-  }
-}
-
-
-
-@Component({
-  selector: 'dialog-create-chauffeur',
-  templateUrl: 'create-pop.html',
-})
-export class CreateChauffeurDialog {
-  nomchauffeur: any="";
-  prenomchauffeur: any="";
-  site:any="";
-  cin: any="";
-  tel: any="";
-  createdat:any="";
-
-  constructor(public dialogRef: MatDialogRef<CreateChauffeurDialog>,
-    
-  public load: LoadserviceService) { }
-  close() {
-    this.dialogRef.close();
-  }
-  create(){
-    let senddata =
-    {
-       "nomchauffeur": this.nomchauffeur,
-      "prenomchauffeur": this.prenomchauffeur,
-      "site": this.site,
-      "cin": this.cin,
-       "createdat":this.createdat,
-      
-    };
-    if(this.nomchauffeur=="" || this.prenomchauffeur=="" || this.site=="" || this.cin=="" || this.createdat=="")
-    {this.load.openSnackBar("Please Fill in all inputs");}
-   else {
-    this.load.post(senddata, "CreateChauffeur").then(
-      (data: any) => {
-        console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("Create Done"); }
-        else this.load.openSnackBar("Error");
-
-      });
-   }
-  }
-}
 
 
 

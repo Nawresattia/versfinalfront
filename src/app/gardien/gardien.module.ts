@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,13 +8,15 @@ import { LogbfournisseurazComponent } from './components/logbfournisseuraz/logbf
 import { LogbsparcrComponent } from './components/logbsparcr/logbsparcr.component';
 import { LogbscourComponent } from './components/logbscour/logbscour.component';
 import { LogbmainteComponent } from './components/logbmainte/logbmainte.component';
- 
+
 
 @NgModule({
   declarations: [GardienComponent, LogbfournisseurazComponent, LogbsparcrComponent, LogbscourComponent,  LogbmainteComponent],
   imports: [
     CommonModule,
-    GardienRoutingModule
+    GardienRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class GardienModule { }

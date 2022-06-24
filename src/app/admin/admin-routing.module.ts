@@ -1,9 +1,10 @@
+import { DirecteurGeneralsComponent } from './components/directeur-generals/directeur-generals.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
- 
+
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
- 
+
 import { DirecteurGeneralAdminComponent } from './components/directeur-general/directeur-general.component';
 import { DirecteurSiteAdminComponent } from './components/directeur-site/directeur-site.component';
 import { LgParcroulantComponent } from './components/lg-parcroulant/lg-parcroulant.component';
@@ -17,10 +18,10 @@ children: [
     path: '',
     component: DashboardComponent,
   },
-   
+
   {
     path: 'dirg',
-    component: DirecteurGeneralAdminComponent,
+    component: DirecteurGeneralsComponent,
   },
   {
   path: 'ds',
@@ -34,7 +35,7 @@ children: [
     path:'lparcroulant',
     component:LgParcroulantComponent,
   },
-   
+
    {
      path:'rc',
      component:LgRCourriersComponent,
@@ -43,7 +44,7 @@ children: [
      path:'Ma',
      component:LgbMaintenanceComponent,
    }
-]}, 
+]},
 
 ]
 @NgModule({

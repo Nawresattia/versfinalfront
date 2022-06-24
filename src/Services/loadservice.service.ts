@@ -10,6 +10,8 @@ export class LoadserviceService {
   constructor(private http: HttpClient, private snackBar: MatSnackBar,){ }
 
   post(body, rest) {
+    console.log(body)
+    console.log(rest)
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -26,6 +28,7 @@ export class LoadserviceService {
     });
 
   }
+
 
   get(rest) {
     return new Promise((resolve, reject) => {

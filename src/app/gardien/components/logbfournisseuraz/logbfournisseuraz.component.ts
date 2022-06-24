@@ -1,5 +1,6 @@
+import { LogbookServiceService } from './../../../Services/logbook-service.service';
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoadserviceService } from 'src/Services/loadservice.service';
 
 @Component({
@@ -8,52 +9,62 @@ import { LoadserviceService } from 'src/Services/loadservice.service';
   styleUrls: ['./logbfournisseuraz.component.scss']
 })
 export class LogbfournisseurazComponent implements OnInit {
+  Entrepot: any="";
+  dates: any="";
+  Heure_arrive: any="";
+  Heure_entre: any="";
+  Heure_depart: any="";
+  fournisseur: any;
 
-  constructor() { }
+  constructor(private logbokk:LogbookServiceService, public load: LoadserviceService ) { }
 
   ngOnInit(): void {
   }
   create(){
-    
-    };
-  }
-  export class CreatelogbookgrDialog {
-    Entrepot: any="";
-    date: any="";
-    Heure_arrive: any="";
-    Heure_entre: any="";
-    Heure_depart: any="";
-    
-    constructor(public dialogRef: MatDialogRef<CreatelogbookgrDialog>,
-      
-    public load: LoadserviceService) { }
-    close() {
-      this.dialogRef.close();
-    }
-  
-  create() {
-    
     let senddata =
     {
-      "Entrepot": this.Entrepot,
-      "date": this.date,
+      "fournisseur":this.fournisseur,
+      "entrepot": this.Entrepot,
+      "date": this.dates,
       "Heure_arrive": this.Heure_arrive,
       "Heure_entre": this.Heure_entre,
       "Heure_depart": this.Heure_depart,
-      
+
     };
     console.log(senddata);
-    if(this.Entrepot=="" || this.date=="" ||this.Heure_arrive=="" || this.Heure_entre=="" || this.Heure_depart=="" )
+    if(this.Entrepot=="" || this.dates=="" ||this.Heure_arrive=="" || this.Heure_entre=="" || this.Heure_depart=="" )
     {this.load.openSnackBar("Please Fill in all inputs");}
-   else {
-    console.log(senddata);
-    this.load.post(senddata, "CreateReception").then(
-      (data: any) => {
-        console.log(data);
-        if (data.key == "true") { this.load.openSnackBar("Create Done"); }
-        else this.load.openSnackBar("Error");
+    else {
+      console.log(senddata);
+      this.logbokk.InsertReception(senddata).subscribe(data=>{
+        console.log(data)
 
+        alert("ajouter")
+
+        window.location.reload()
+      },error=>{
+        console.log(error)
+        alert("error")
       });
-   }
+     }
   }
-}
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

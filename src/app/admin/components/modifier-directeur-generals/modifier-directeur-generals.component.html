@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>   Modifier un gardien</h2>
 <mat-dialog-content class="mat-typography">
 
-    <div class="p-5">                            
+    <div class="p-5">
         <form class="user">
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -11,7 +11,7 @@
                     <input type="text" class="form-control" placeholder="Last Name" name="nom" [(ngModel)]="nom">
                 </div>
             </div>
-            
+
                 <!-- <div class="col-sm-6 mb-3 mb-sm-0">
                     <select class="form-control" name="role" [(ngModel)]="role">
                         <option value="gardien">Gardien</option>
@@ -20,39 +20,41 @@
                         <option value="admin">Admin</option>
                     </select>
                 </div> -->
-                <div class="mb-3">
-                    <label for="site "> choisir un site site</label>
-                  <select name="site" id="site">
-                    <option value="bouargoub">bouargoub</option>
-                    <option value="sahline">sahline</option>
-                    <option value="Ben arous">Ben arous</option>
-                    <option value="manzel tmim">manzel tmim</option>
-                  </select>
-                  
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="date" class="form-control" placeholder="date" name="date" [(ngModel)]="date">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                       <label for="site "> choisir un site site</label>
+                        <select name="site" id="site" name="site" [(ngModel)]="site" value="{{site}}">
+                          <option value="bouargoub">bouargoub</option>
+                          <option value="sahline">sahline</option>
+                          <option value="Ben arous">Ben arous</option>
+                          <option value="manzel tmim">manzel tmim</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="tel"  class="form-control" placeholder="Telephone" name="tel" [(ngModel)]="tel">
+                    </div>
+
                 </div>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" placeholder="Telephone" name="tel" [(ngModel)]="tel">
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email Address" name="email" [(ngModel)]="email">
-            </div>
             <div class="form-group row">
+
+
+               <div class="col-sm-6">
+                 <input type="email" placeholder="Email Address"  ng-reflet-model="" name="email" [(ngModel)]="email">
+               </div>
+
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="password">
                 </div>
-            </div> 
-           </form>        
-        
-        
+            </div>
+
+
+        </form>
+
+
     </div>
 
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Annuler</button>
+
   <button mat-button class="btn btn-primary" cdkFocusInitial (click)="update()">Modifier</button>
 </mat-dialog-actions>

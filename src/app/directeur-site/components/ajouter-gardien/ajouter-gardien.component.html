@@ -1,0 +1,50 @@
+<form class="user" style="width: 400px;">
+
+  <h2>Ajouter un gardin</h2>
+
+<div class="mb-3">
+  <label for="Nom" class="form-label"> Nom Gardien</label>
+  <input type="text" class="form-control" id="nom" size="15" aria-describedby="nom" [(ngModel)] = "nom" name="nom">
+ </div>
+
+
+ <div class="mb-3">
+  <label for="Email" class="form-label">Email </label>
+  <input type="email" class="form-control" id="email" size="15" aria-describedby="email" [(ngModel)] = "email" name="email">
+ </div>
+
+ <div class="mb-3">
+  <label for="Nom" class="form-label"> prenom Gardien</label>
+  <input type="text" class="form-control" id="prenom" size="15" aria-describedby="prenom" [(ngModel)] = "prenom" name="prenom">
+ </div>
+
+ <div class="mb-3">
+  <label for="site "> choisir un site site</label>
+<select name="site" id="site" class="form-control form-control-lg" [(ngModel)]="site">
+  <option selected value="" disabled>choisir</option>
+  <option value="bouargoub">bouargoub</option>
+  <option value="sahline">sahline</option>
+  <option value="Ben arous">Ben arous</option>
+  <option value="manzel tmim">manzel tmim</option>
+</select>
+ </div>
+
+ <div class="mb-3">
+  <label for="tel" class="form-label"> telephone gardien</label>
+  <input type="tel" class="form-control" id="tel" size="15" aria-describedby="tel" [(ngModel)] = "tel" name="tel">
+ </div>
+ <div class="form-group row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+      <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="password">
+  </div>
+</div>
+
+ <div class="modal-footer">
+ <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Annuler</button>
+ <button  type="button" class="btn btn-primary" cdkFocusInitial (click) = 'create()' >ajouter</button>
+
+ </div>
+
+</form>
+
+
